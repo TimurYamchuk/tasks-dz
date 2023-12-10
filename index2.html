@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <script>
+      class Operation {
+         constructor(numerator, denominator) {
+            this.numerator = numerator;
+            this.denominator = denominator !== 0 ? denominator : 1;
+         }
+
+         gcd(a, b) {
+            if (b === 0) {
+               return a;
+            } else {
+               return this.gcd(b, a % b);
+            }
+         }
+
+         add(otherFraction) {
+            let newNumerator = this.numerator * otherFraction.denominator + otherFraction.numerator * this.denominator;
+            let newDenominator = this.denominator * otherFraction.denominator;
+            let common = this.gcd(Math.abs(newNumerator), Math.abs(newDenominator));
+
+            return new Operation(newNumerator / common, newDenominator / common);
+         }
+
+         subtract(otherFraction) {
+            let newNumerator = this.numerator * otherFraction.denominator - otherFraction.numerator * this.denominator;
+            let newDenominator = this.denominator * otherFraction.denominator;
+            let common = this.gcd(Math.abs(newNumerator), Math.abs(newDenominator));
+
+            return new Operation(newNumerator / common, newDenominator / common);
+         }
+
+         multiply(otherFraction) {
+            let newNumerator = this.numerator * otherFraction.numerator;
+            let newDenominator = this.denominator * otherFraction.denominator;
+            let common = this.gcd(Math.abs(newNumerator), Math.abs(newDenominator));
+
+            return new Operation(newNumerator / common, newDenominator / common);
+         }
+
+         divide(otherFraction) {
+            let newNumerator = this.numerator * otherFraction.denominator;
+            let newDenominator = this.denominator * otherFraction.numerator;
+            let common = this.gcd(Math.abs(newNumerator), Math.abs(newDenominator));
+
+            return new Operation(newNumerator / common, newDenominator / common);
+         }
+
+         simplify() {
+            let common = this.gcd(Math.abs(this.numerator), Math.abs(this.denominator));
+            this.numerator /= common;
+            this.denominator /= common;
+         }
+      }
+
+      let Operation1 = new Operation(3, 4);
+      let Operation2 = new Operation(1, 2);
+
+      let added = Operation1.add(Operation2);
+      let subtracted = Operation1.subtract(Operation2);
+      let multiplied = Operation1.multiply(Operation2);
+      let divided = Operation1.divide(Operation2);
+
+      console.log("Сложение:", added.numerator, "/", added.denominator);
+      console.log("Вычитание:", subtracted.numerator, "/", subtracted.denominator);
+      console.log("Умножение:", multiplied.numerator, "/", multiplied.denominator);
+      console.log("Деление:", divided.numerator, "/", divided.denominator);
+
+      let Operation3 = new Operation(15, 20);
+      Operation3.simplify();
+      console.log("Сокращенная дробь:", Operation3.numerator, "/", Operation3.denominator);
+   </script>
+</body>
+
+</html>

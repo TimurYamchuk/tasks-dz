@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <script>
+      class Time {
+         constructor(hours, minutes, seconds) {
+            this.hours = hours;
+            this.minutes = minutes;
+            this.seconds = seconds;
+         }
+
+         printTime() {
+            let formattedHours = this.hours < 10 ? '0' + this.hours : this.hours;
+            let formattedMinutes = this.minutes < 10 ? '0' + this.minutes : this.minutes;
+            let formattedSeconds = this.seconds < 10 ? '0' + this.seconds : this.seconds;
+
+            console.log(formattedHours + ':' + formattedMinutes + ':' + formattedSeconds);
+         }
+
+         changeSeconds(seconds) {
+            this.seconds += seconds;
+            this.minutes += Math.floor(this.seconds / 60);
+            this.seconds %= 60;
+            this.hours += Math.floor(this.minutes / 60);
+            this.minutes %= 60;
+            this.hours %= 24;
+         }
+
+         changeMinutes(minutes) {
+            this.minutes += minutes;
+            this.hours += Math.floor(this.minutes / 60);
+            this.minutes %= 60;
+            this.hours %= 24;
+         }
+
+         changeHours(hours) {
+            this.hours += hours;
+            this.hours %= 24;
+         }
+      }
+
+      let time = new Time(20, 30, 45);
+      time.printTime(); // Вывод: 20:30:45
+
+      time.changeSeconds(30);
+      time.printTime(); // Вывод: 20:31:15
+
+      time.changeMinutes(10);
+      time.printTime(); // Вывод: 20:41:15
+
+      time.changeHours(4);
+      time.printTime(); // Вывод: 00:41:15 (на следующий день)
+   </script>
+</body>
+
+</html>

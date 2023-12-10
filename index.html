@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Home work</title>
+</head>
+
+<body>
+   <script>
+      class Car {
+         constructor(manufacturer, model, year, averageSpeed) {
+            this.manufacturer = manufacturer;
+            this.model = model;
+            this.year = year;
+            this.averageSpeed = averageSpeed;
+         }
+
+         showInfo() {
+            document.write("Производитель: ", this.manufacturer, "<br>");
+            document.write("Модель: ", this.model, "<br>");
+            document.write("Год выпуска: ", this.year, "<br>");
+            document.write("Средняя скорость: ", this.averageSpeed, " км/ч", "<br>", "<br>");
+         }
+
+         calculateTime(distance) {
+            let time = distance / this.averageSpeed;
+            let restCount = Math.floor(time / 4);
+
+            time += restCount;
+
+            return time;
+         }
+      }
+
+      let car1 = new Car("BMW", "X5", 2022, 60);
+      let car2 = new Car("Audi", "A4", 2021, 55);
+
+      car1.showInfo();
+      car2.showInfo();
+
+      let distanceToTravel = 300;
+      let timeCar1 = car1.calculateTime(distanceToTravel);
+      let timeCar2 = car2.calculateTime(distanceToTravel);
+
+      document.write("Для автомобиля 1 (", car1.manufacturer, " ", car1.model, ") время на преодоление ", distanceToTravel, " км: ", timeCar1.toFixed(2), " часов", "<br>");
+      document.write("Для автомобиля 2 (", car2.manufacturer, " ", car2.model, ") время на преодоление ", distanceToTravel, " км: ", timeCar2.toFixed(2), " часов", "<br>");
+   </script>
+</body>
+
+</html>
